@@ -1,0 +1,53 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35931.197
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{53C436B9-2D6D-4F34-B930-6FAC947630A9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PruebaTecnicaSodimac.Api", "PruebaTecnicaSodimac.Api\PruebaTecnicaSodimac.Api.csproj", "{31677B2B-6062-D3BD-BBAD-513A7B6FB1BF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PruebaTecnicaSodimac.Application", "PruebaTecnicaSodimac.Applicacion\PruebaTecnicaSodimac.Application.csproj", "{BA55C19E-6408-A1FF-7581-96ACC746E6EA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PruebaTecnicaSodimac.Domain", "PruebaTecnicaSodimac.Domain\PruebaTecnicaSodimac.Domain.csproj", "{DF4764D7-7FB3-F35A-F989-CD0FCE54207D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PruebaTecnicaSodimac.Infrastructure", "PruebaTecnicaSodimac.Infrastructure\PruebaTecnicaSodimac.Infrastructure.csproj", "{B5E40D29-53B3-E066-E03D-DF142C62ABD6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{31677B2B-6062-D3BD-BBAD-513A7B6FB1BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31677B2B-6062-D3BD-BBAD-513A7B6FB1BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31677B2B-6062-D3BD-BBAD-513A7B6FB1BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31677B2B-6062-D3BD-BBAD-513A7B6FB1BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA55C19E-6408-A1FF-7581-96ACC746E6EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA55C19E-6408-A1FF-7581-96ACC746E6EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA55C19E-6408-A1FF-7581-96ACC746E6EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA55C19E-6408-A1FF-7581-96ACC746E6EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DF4764D7-7FB3-F35A-F989-CD0FCE54207D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF4764D7-7FB3-F35A-F989-CD0FCE54207D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF4764D7-7FB3-F35A-F989-CD0FCE54207D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF4764D7-7FB3-F35A-F989-CD0FCE54207D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B5E40D29-53B3-E066-E03D-DF142C62ABD6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B5E40D29-53B3-E066-E03D-DF142C62ABD6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B5E40D29-53B3-E066-E03D-DF142C62ABD6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B5E40D29-53B3-E066-E03D-DF142C62ABD6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{31677B2B-6062-D3BD-BBAD-513A7B6FB1BF} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{BA55C19E-6408-A1FF-7581-96ACC746E6EA} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{DF4764D7-7FB3-F35A-F989-CD0FCE54207D} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{B5E40D29-53B3-E066-E03D-DF142C62ABD6} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DA7CD5FF-825D-4DAD-BEDB-119680725A29}
+	EndGlobalSection
+EndGlobal
