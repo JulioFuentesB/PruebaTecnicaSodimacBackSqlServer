@@ -39,6 +39,7 @@ public static class DependecyInjection
 		services.AddTransient<IRouteService, SimulatedRouteService>();
 		services.AddTransient<IPedidoService, PedidoService>();
 		services.AddTransient<IRutaService, RutaService>();
+        services.AddTransient<IClienteService, ClienteService>();
 
         return services;
 	}

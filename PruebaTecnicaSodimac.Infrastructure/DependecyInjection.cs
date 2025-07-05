@@ -66,21 +66,32 @@ public static class DependecyInjection
 		var ListOrigin = Environment.GetEnvironmentVariable(ConfigurationStruct.WithOrigins)
 			?.Split(',').ToList();
 		ListOrigin = ListOrigin == null ? new List<string>() : ListOrigin;
-		//cors
-		services.AddCors(options =>
-		{
-			options.AddPolicy(ConfigurationStruct.CorsPolicy,
-				builder => builder
-					.AllowAnyMethod()
-					.AllowAnyHeader()
-					.WithOrigins("*"/*ListOrigin.ToArray()*/));
-		});
+        //cors
+        //services.AddCors(options =>
+        //{
+        //	options.AddPolicy(ConfigurationStruct.CorsPolicy,
+        //		builder => builder
+        //			.AllowAnyMethod()
+        //			.AllowAnyHeader()
+        //			.WithOrigins("*"/*ListOrigin.ToArray()*/));
+        //});
+
+    //    var origenesPermitidos = configuration.GetValue<string>("origenesPermitidos")!.Split(",");
+    //    services.AddCors(opciones =>
+    //    {
+    //        opciones.AddDefaultPolicy(opcionesCORS =>
+    //        {
+				//opcionesCORS.WithOrigins(origenesPermitidos).AllowAnyMethod().AllowAnyHeader()
+    //            .WithExposedHeaders("cantidad-total-registros");
+    //        });
+    //    });
 
 
-		services.Configure<AppSettings>(options => configuration.Bind(options));
+        services.Configure<AppSettings>(options => configuration.Bind(options));
 
 		services.AddTransient<IPedidoRepository, PedidoRepository>();
         services.AddTransient<IRutaRepository, RutaRepository>();
+		services.AddTransient<IClienteRepository, ClienteRepository>();
 
 
 

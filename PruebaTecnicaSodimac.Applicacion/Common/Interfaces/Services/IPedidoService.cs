@@ -27,4 +27,13 @@ namespace PruebaTecnicaSodimac.Application.Common.Interfaces.Services
         Task ActualizarAsync(int id, RutaUpdateDto dto);
         Task EliminarAsync(int id);
     }
+
+    public interface IClienteService
+    {
+        Task<IEnumerable<ClienteDto>> ObtenerTodosAsync();
+        Task<ClienteDto?> ObtenerPorIdAsync(int id);
+        Task<ClienteDto> CrearAsync(ClienteCreateDto dto);
+        Task ActualizarAsync(int id, ClienteUpdateDto dto);
+        Task EliminarAsync(int id);
+    }
 }

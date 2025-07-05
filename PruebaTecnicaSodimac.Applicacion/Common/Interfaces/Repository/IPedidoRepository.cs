@@ -5,6 +5,7 @@
 // </copyright>
 
 using ClassLibrary1.Data.Entities;
+using PruebaTecnicaSodimac.Application.Common.Entidad;
 
 namespace PruebaTecnicaSodimac.Application.Common.Interfaces.Repository
 {
@@ -28,6 +29,16 @@ namespace PruebaTecnicaSodimac.Application.Common.Interfaces.Repository
         Task UpdateAsync(Ruta ruta);
         Task DeleteAsync(Ruta ruta);
         Task<bool> HasPedidosAsociadosAsync(int idRuta);
+    }
+
+    public interface IClienteRepository
+    {
+        Task<IEnumerable<Cliente>> GetAllAsync();
+        Task<Cliente?> GetByIdAsync(int id);
+        Task<Cliente> CreateAsync(Cliente cliente);
+        Task UpdateAsync(Cliente cliente);
+        Task DeleteAsync(Cliente cliente);
+        Task<bool> TienePedidosAsociadosAsync(int idCliente);
     }
 
 }
