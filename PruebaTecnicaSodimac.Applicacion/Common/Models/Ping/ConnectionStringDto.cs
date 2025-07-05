@@ -8,5 +8,5 @@ namespace PruebaTecnicaSodimac.Application.Common.Models.Ping;
 
 public class ConnectionDto
 {
-	public string Connection { get; set; } = null!;
+    public string Connection { get; set; } = null!;
 }

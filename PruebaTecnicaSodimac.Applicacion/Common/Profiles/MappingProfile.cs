@@ -10,17 +10,17 @@ namespace PruebaTecnicaSodimac.Application.Common.Profiles;
 
 public class MappingProfile : Profile
 {
-	public MappingProfile()
-	{
-	}
+    public MappingProfile()
+    {
+    }
 
-	protected internal MappingProfile(string profileName) : base(profileName)
-	{
-	}
+    protected internal MappingProfile(string profileName) : base(profileName)
+    {
+    }
 
-	protected internal MappingProfile(string profileName,
-		Action<IProfileExpression> configurationAction) : base(profileName,
-		configurationAction)
-	{
-	}
+    protected internal MappingProfile(string profileName,
+        Action<IProfileExpression> configurationAction) : base(profileName,
+        configurationAction)
+    {
+    }
 }

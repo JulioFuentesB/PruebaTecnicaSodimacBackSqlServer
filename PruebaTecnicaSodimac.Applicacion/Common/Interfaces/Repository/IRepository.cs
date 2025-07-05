@@ -10,12 +10,12 @@ namespace PruebaTecnicaSodimac.Application.Common.Interfaces.Repository;
 
 public interface IRepository<T> where T : class
 {
-	Task<List<T>> GetAll();
-	Task<List<T>> GetAll(Expression<Func<T, bool>> predicate);
-	Task<T?> GetById(int id);
-	Task<T?> Get(Expression<Func<T, bool>> predicate);
-	Task Add(T entity);
-	void Update(T entity);
-	Task Delete(int id);
-	Task<int> CountRecord();
+    Task<List<T>> GetAll();
+    Task<List<T>> GetAll(Expression<Func<T, bool>> predicate);
+    Task<T?> GetById(int id);
+    Task<T?> Get(Expression<Func<T, bool>> predicate);
+    Task Add(T entity);
+    void Update(T entity);
+    Task Delete(int id);
+    Task<int> CountRecord();
 }

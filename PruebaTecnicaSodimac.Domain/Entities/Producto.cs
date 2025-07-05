@@ -8,15 +8,15 @@ namespace ClassLibrary1.Data.Entities;
 
 public partial class Producto
 {
-	public int IdProducto { get; set; }
+    public int IdProducto { get; set; }
 
-	public string Nombre { get; set; } = null!;
+    public string Nombre { get; set; } = null!;
 
-	public string Sku { get; set; } = null!;
+    public string Sku { get; set; } = null!;
 
-	public string? Descripcion { get; set; }
+    public string? Descripcion { get; set; }
 
-	public decimal Precio { get; set; }
+    public decimal Precio { get; set; }
 
-	public virtual ICollection<PedidoProducto> PedidoProductos { get; set; } = new List<PedidoProducto>();
+    public virtual ICollection<PedidoProducto> PedidoProductos { get; set; } = new List<PedidoProducto>();
 }

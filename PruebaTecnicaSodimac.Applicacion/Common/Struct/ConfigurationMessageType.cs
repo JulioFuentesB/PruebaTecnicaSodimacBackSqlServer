@@ -8,8 +8,8 @@ namespace PruebaTecnicaSodimac.Application.Common.Struct;
 
 public struct ConfigurationMessageType
 {
-	public const string Error = "Error";
-	public const string Critical = "Critical";
-	public const string Information = "Information";
-	public const string Warning = "Warning";
+    public const string Error = "Error";
+    public const string Critical = "Critical";
+    public const string Information = "Information";
+    public const string Warning = "Warning";
 }

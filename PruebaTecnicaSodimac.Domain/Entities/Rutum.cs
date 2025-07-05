@@ -8,13 +8,13 @@ namespace ClassLibrary1.Data.Entities;
 
 public partial class Ruta
 {
-	public int IdRuta { get; set; }
+    public int IdRuta { get; set; }
 
-	public string Estado { get; set; } = null!;
+    public string Estado { get; set; } = null!;
 
-	public DateTime FechaAsignacion { get; set; }
+    public DateTime FechaAsignacion { get; set; }
 
-	public DateTime? FechaEstimadaEntrega { get; set; }
+    public DateTime? FechaEstimadaEntrega { get; set; }
 
-	public virtual ICollection<PedidoRutas> PedidoRuta { get; set; } = new List<PedidoRutas>();
+    public virtual ICollection<PedidoRutas> PedidoRuta { get; set; } = new List<PedidoRutas>();
 }

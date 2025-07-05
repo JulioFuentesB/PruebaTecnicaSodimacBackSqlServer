@@ -8,9 +8,9 @@ namespace PruebaTecnicaSodimac.Application.Common.QueryFilter;
 
 public class ApplicationUserQueryFilter
 {
-	public int IdAplicacion { get; set; }
+    public int IdAplicacion { get; set; }
 
-	public DateTime? FechaInicio { get; set; }
+    public DateTime? FechaInicio { get; set; }
 
-	public DateTime? FechaFin { get; set; }
+    public DateTime? FechaFin { get; set; }
 }

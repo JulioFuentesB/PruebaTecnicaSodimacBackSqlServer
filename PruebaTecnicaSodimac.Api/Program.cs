@@ -1,8 +1,12 @@
+using Microsoft.OpenApi.Models;
 using PruebaTecnicaSodimac.Application;
 using PruebaTecnicaSodimac.Infrastructure;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
+string versionApi = "v1.0";
+string? AssemblyName = Assembly.GetExecutingAssembly().GetName().Name;
 // Add services to the container.
 
 builder.Services.AddControllers();
@@ -23,12 +27,33 @@ builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddApplication();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+//builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(options =>
+{
+
+    options.SwaggerDoc(versionApi, new OpenApiInfo
+    {
+        Title = $"Prueba Tecnica Sodimac Back",
+        Version = versionApi,
+        Description = "Api ",
+        Contact = new OpenApiContact
+        {
+            Name = ""
+        }
+    });
+    // Get the XML file path for your API project
+    //var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    //var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+    //options.IncludeXmlComments(xmlPath);
+});
 
 var app = builder.Build();
 
 app.UseSwagger();
-app.UseSwaggerUI();
+app.UseSwaggerUI(c =>
+{
+    c.SwaggerEndpoint($"../swagger/{versionApi}/swagger.json", $"API {versionApi}");
+});
 
 app.UseHttpsRedirection();
 

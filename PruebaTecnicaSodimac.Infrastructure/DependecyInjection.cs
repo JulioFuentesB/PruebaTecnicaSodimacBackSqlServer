@@ -20,52 +20,52 @@ namespace PruebaTecnicaSodimac.Infrastructure;
 public static class DependecyInjection
 {
 
-	public static void AddDbContext(this WebApplicationBuilder builder)
-	{
+    public static void AddDbContext(this WebApplicationBuilder builder)
+    {
 
-		AddHacvSglDbContextFactory(builder);
+        AddHacvSglDbContextFactory(builder);
 
 
-	}
+    }
 
-	private static void AddHacvSglDbContextFactory(WebApplicationBuilder builder)
-	{
-		builder?.Services.AddDbContextFactory<AppDbContext>(options =>
-		{
-			ConfigureDbContextOptions(builder, options, ""/*ConfigurationStruct.SGL_HCAV*/);
-		});
+    private static void AddHacvSglDbContextFactory(WebApplicationBuilder builder)
+    {
+        builder?.Services.AddDbContextFactory<AppDbContext>(options =>
+        {
+            ConfigureDbContextOptions(builder, options, ""/*ConfigurationStruct.SGL_HCAV*/);
+        });
         var conexion = "Server=AC-025\\SQLEXPRESS;Database=PruebaTecnicaS;Trusted_Connection=True;TrustServerCertificate=True;";
 
 
 
-    //    builder.Services.AddDbContext<AppDbContext>(opciones =>
-    //opciones.UseSqlServer("name=DefaultConnection", sqlServer =>sqlServer.UseNetTopologySuite()));
+        //    builder.Services.AddDbContext<AppDbContext>(opciones =>
+        //opciones.UseSqlServer("name=DefaultConnection", sqlServer =>sqlServer.UseNetTopologySuite()));
 
     }
 
-	private static void ConfigureDbContextOptions(WebApplicationBuilder builder, DbContextOptionsBuilder options, string connectionStringName)
-	{
+    private static void ConfigureDbContextOptions(WebApplicationBuilder builder, DbContextOptionsBuilder options, string connectionStringName)
+    {
 
-		var conexion = "Server=AC-025\\SQLEXPRESS;Database=PruebaTecnicaS;Trusted_Connection=True;TrustServerCertificate=True;";
-		// Environment.GetEnvironmentVariable(connectionStringName);
+        var conexion = "Server=AC-025\\SQLEXPRESS;Database=PruebaTecnicaS;Trusted_Connection=True;TrustServerCertificate=True;";
+        // Environment.GetEnvironmentVariable(connectionStringName);
 
-		options.UseSqlServer(conexion)
-		.ConfigureWarnings(b => b.Ignore(Microsoft.EntityFrameworkCore.Diagnostics.SqlServerEventId.DecimalTypeDefaultWarning));
+        options.UseSqlServer(conexion)
+        .ConfigureWarnings(b => b.Ignore(Microsoft.EntityFrameworkCore.Diagnostics.SqlServerEventId.DecimalTypeDefaultWarning));
 
-		if (builder!.Environment.IsDevelopment()!)
-		{
-			// Configurar el nivel de registro
-			options.EnableSensitiveDataLogging(); // Esto habilita la información sensible como parámetros de SQL
-			options.LogTo(Console.WriteLine, new[] { DbLoggerCategory.Database.Command.Name }); // Esto redirige los mensajes de registro a la consola
-		}
-	}
+        if (builder!.Environment.IsDevelopment()!)
+        {
+            // Configurar el nivel de registro
+            options.EnableSensitiveDataLogging(); // Esto habilita la información sensible como parámetros de SQL
+            options.LogTo(Console.WriteLine, new[] { DbLoggerCategory.Database.Command.Name }); // Esto redirige los mensajes de registro a la consola
+        }
+    }
 
-	public static IServiceCollection AddInfrastructure(
-		this IServiceCollection services, IConfiguration configuration)
-	{
-		var ListOrigin = Environment.GetEnvironmentVariable(ConfigurationStruct.WithOrigins)
-			?.Split(',').ToList();
-		ListOrigin = ListOrigin == null ? new List<string>() : ListOrigin;
+    public static IServiceCollection AddInfrastructure(
+        this IServiceCollection services, IConfiguration configuration)
+    {
+        var ListOrigin = Environment.GetEnvironmentVariable(ConfigurationStruct.WithOrigins)
+            ?.Split(',').ToList();
+        ListOrigin = ListOrigin == null ? new List<string>() : ListOrigin;
         //cors
         //services.AddCors(options =>
         //{
@@ -76,27 +76,27 @@ public static class DependecyInjection
         //			.WithOrigins("*"/*ListOrigin.ToArray()*/));
         //});
 
-    //    var origenesPermitidos = configuration.GetValue<string>("origenesPermitidos")!.Split(",");
-    //    services.AddCors(opciones =>
-    //    {
-    //        opciones.AddDefaultPolicy(opcionesCORS =>
-    //        {
-				//opcionesCORS.WithOrigins(origenesPermitidos).AllowAnyMethod().AllowAnyHeader()
-    //            .WithExposedHeaders("cantidad-total-registros");
-    //        });
-    //    });
+        //    var origenesPermitidos = configuration.GetValue<string>("origenesPermitidos")!.Split(",");
+        //    services.AddCors(opciones =>
+        //    {
+        //        opciones.AddDefaultPolicy(opcionesCORS =>
+        //        {
+        //opcionesCORS.WithOrigins(origenesPermitidos).AllowAnyMethod().AllowAnyHeader()
+        //            .WithExposedHeaders("cantidad-total-registros");
+        //        });
+        //    });
 
 
         services.Configure<AppSettings>(options => configuration.Bind(options));
 
-		services.AddTransient<IPedidoRepository, PedidoRepository>();
+        services.AddTransient<IPedidoRepository, PedidoRepository>();
         services.AddTransient<IRutaRepository, RutaRepository>();
-		services.AddTransient<IClienteRepository, ClienteRepository>();
+        services.AddTransient<IClienteRepository, ClienteRepository>();
 
 
 
         return services;
-	}
+    }
 
 
 }

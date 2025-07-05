@@ -8,6 +8,6 @@ namespace PruebaTecnicaSodimac.Application.Common.Static;
 
 public static class MetodosMessage
 {
-	public const string pingVersion = "Versión";
-	public const string pingSecretConexion = "SecretConexion";
+    public const string pingVersion = "Versión";
+    public const string pingSecretConexion = "SecretConexion";
 }

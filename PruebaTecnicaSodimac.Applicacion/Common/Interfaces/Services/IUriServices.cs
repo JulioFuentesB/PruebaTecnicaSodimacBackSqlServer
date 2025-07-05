@@ -10,5 +10,5 @@ namespace PruebaTecnicaSodimac.Application.Common.Interfaces.Services;
 
 public interface IUriServices
 {
-	Uri GetUserPaginationUri(UserQueryFilter filter, string actionUrl);
+    Uri GetUserPaginationUri(UserQueryFilter filter, string actionUrl);
 }

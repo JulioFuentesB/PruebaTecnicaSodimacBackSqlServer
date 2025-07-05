@@ -8,9 +8,9 @@ using PruebaTecnicaSodimac.Application.Common.Entidad;
 
 namespace PruebaTecnicaSodimac.Application.Common.Interfaces.Services
 {
-	public interface IRouteService
-	{
-		Task<RouteAssignmentResponse> AssignRouteAsync(List<OrderAssignmentRequest> orders);
-		Task<RouteStatusResponse> GetRouteStatusAsync(int IdRoute);
-	}
+    public interface IRouteService
+    {
+        Task<RouteAssignmentResponse> AssignRouteAsync(List<OrderAssignmentRequest> orders);
+        Task<RouteStatusResponse> GetRouteStatusAsync(int IdRoute);
+    }
 }

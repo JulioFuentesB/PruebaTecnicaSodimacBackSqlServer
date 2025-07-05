@@ -10,8 +10,8 @@ namespace PruebaTecnicaSodimac.Application.Common.Interfaces.Services.Serilog;
 
 public interface ISerilogImplements
 {
-	public string? ObtainMessageDefault(string messageType, string method,
-		string? parameters, string? message, [CallerMemberName] string memberName = "",
-		[CallerFilePath] string sourceFilePath = "",
-		[CallerLineNumber] int sourceLineNumber = 0);
+    public string? ObtainMessageDefault(string messageType, string method,
+        string? parameters, string? message, [CallerMemberName] string memberName = "",
+        [CallerFilePath] string sourceFilePath = "",
+        [CallerLineNumber] int sourceLineNumber = 0);
 }

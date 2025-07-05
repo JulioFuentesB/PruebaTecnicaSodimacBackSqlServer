@@ -8,11 +8,11 @@ namespace PruebaTecnicaSodimac.Application.Common.QueryFilter;
 
 public class UserQueryFilter
 {
-	public DateTime? fechaInicio { get; set; }
+    public DateTime? fechaInicio { get; set; }
 
-	public DateTime? fechaFin { get; set; }
+    public DateTime? fechaFin { get; set; }
 
-	public int pageSize { get; set; }
+    public int pageSize { get; set; }
 
-	public int pageNumber { get; set; }
+    public int pageNumber { get; set; }
 }

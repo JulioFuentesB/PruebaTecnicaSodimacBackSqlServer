@@ -5,21 +5,20 @@
 // </copyright>
 
 using ClassLibrary1.Data.Entities;
-using PruebaTecnicaSodimac.Application.Common.Entidad;
 
 namespace PruebaTecnicaSodimac.Application.Common.Interfaces.Repository
 {
-	public interface IPedidoRepository
-	{
-		Task<List<Pedido>> GetPedidosAsync(int page, int pageSize);
-		Task<Pedido?> GetPedidoByIdAsync(int id);
-		Task AddPedidoAsync(Pedido pedido);
-		Task UpdatePedidoAsync(Pedido pedido);
-		Task DeletePedidoAsync(Pedido pedido);
-		Task<List<Pedido>> GetPedidosPorClienteAsync(int idCliente);
-		Task<List<Pedido>> GetPedidosPorIdsAsync(List<int> ids);
-		Task SaveChangesAsync();
-	}
+    public interface IPedidoRepository
+    {
+        Task<List<Pedido>> GetPedidosAsync(int page, int pageSize);
+        Task<Pedido?> GetPedidoByIdAsync(int id);
+        Task AddPedidoAsync(Pedido pedido);
+        Task UpdatePedidoAsync(Pedido pedido);
+        Task DeletePedidoAsync(Pedido pedido);
+        Task<List<Pedido>> GetPedidosPorClienteAsync(int idCliente);
+        Task<List<Pedido>> GetPedidosPorIdsAsync(List<int> ids);
+        Task SaveChangesAsync();
+    }
 
     public interface IRutaRepository
     {

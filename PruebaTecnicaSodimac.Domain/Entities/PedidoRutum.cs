@@ -8,15 +8,15 @@ namespace ClassLibrary1.Data.Entities;
 
 public partial class PedidoRutas
 {
-	public int PedidoIdRuta { get; set; }
+    public int PedidoIdRuta { get; set; }
 
-	public int IdPedido { get; set; }
+    public int IdPedido { get; set; }
 
-	public int IdRuta { get; set; }
+    public int IdRuta { get; set; }
 
-	public DateTime? FechaAsignacion { get; set; }
+    public DateTime? FechaAsignacion { get; set; }
 
-	public virtual Pedido IdPedidoNavigation { get; set; } = null!;
+    public virtual Pedido IdPedidoNavigation { get; set; } = null!;
 
-	public virtual Ruta IdRutaNavigation { get; set; } = null!;
+    public virtual Ruta IdRutaNavigation { get; set; } = null!;
 }

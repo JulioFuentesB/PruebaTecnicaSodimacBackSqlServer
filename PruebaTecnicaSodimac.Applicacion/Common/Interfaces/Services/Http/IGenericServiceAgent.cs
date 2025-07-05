@@ -8,18 +8,18 @@ namespace PruebaTecnicaSodimac.Application.Common.Interfaces.Services.Http;
 
 public interface IGenericServiceAgent
 {
-	Task<T?> PostAsync<T>(string url, object body,
-		string contentType = "application/json",
-		CancellationToken cancellationToken = default);
+    Task<T?> PostAsync<T>(string url, object body,
+        string contentType = "application/json",
+        CancellationToken cancellationToken = default);
 
-	Task<T?> PostAsync<T>(string url, object body,
-		string? SubscriptionKey = null, string contentType = "application/json",
-		CancellationToken cancellationToken = default);
+    Task<T?> PostAsync<T>(string url, object body,
+        string? SubscriptionKey = null, string contentType = "application/json",
+        CancellationToken cancellationToken = default);
 
-	Task<T?> PutAsync<T>(string url, object body,
-		string contentType = "application/json",
-		CancellationToken cancellationToken = default);
+    Task<T?> PutAsync<T>(string url, object body,
+        string contentType = "application/json",
+        CancellationToken cancellationToken = default);
 
-	Task<T?> GetAsync<T>(string url, string contentType = "application/json",
-		CancellationToken cancellationToken = default);
+    Task<T?> GetAsync<T>(string url, string contentType = "application/json",
+        CancellationToken cancellationToken = default);
 }

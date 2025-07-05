@@ -8,6 +8,6 @@ namespace PruebaTecnicaSodimac.Application.Common.Interfaces.Services.Http;
 
 public interface IHttpClientDomainService
 {
-	Task<HttpResponseMessage> SendAsync<T>(HttpRequestMessage request,
-		CancellationToken cancellationToken);
+    Task<HttpResponseMessage> SendAsync<T>(HttpRequestMessage request,
+        CancellationToken cancellationToken);
 }

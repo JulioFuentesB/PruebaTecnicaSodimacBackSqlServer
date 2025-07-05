@@ -8,6 +8,6 @@ namespace PruebaTecnicaSodimac.Infrastructure.Common.Static;
 
 public static class UserTypeMessages
 {
-	public const string ERRUSRTP01 =
-		"ERR01 - Ocurrió un error general en la aplicación";
+    public const string ERRUSRTP01 =
+        "ERR01 - Ocurrió un error general en la aplicación";
 }

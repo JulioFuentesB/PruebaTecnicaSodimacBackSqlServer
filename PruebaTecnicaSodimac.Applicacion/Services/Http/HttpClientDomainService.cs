@@ -11,31 +11,31 @@ namespace PruebaTecnicaSodimac.Application.Services.Http;
 
 internal class HttpClientDomainService : IHttpClientDomainService
 {
-	#region Variables
+    #region Variables
 
-	private readonly HttpClient _client;
+    private readonly HttpClient _client;
 
-	#endregion Variables
+    #endregion Variables
 
-	#region Constructor
+    #region Constructor
 
-	public HttpClientDomainService()
-	{
-		_client = new HttpClient();
-		_client.Timeout = TimeSpan.FromMinutes(5);
-	}
+    public HttpClientDomainService()
+    {
+        _client = new HttpClient();
+        _client.Timeout = TimeSpan.FromMinutes(5);
+    }
 
-	#endregion Constructor
+    #endregion Constructor
 
-	#region Methods
+    #region Methods
 
-	public async Task<HttpResponseMessage> SendAsync<T>(
-		HttpRequestMessage request, CancellationToken cancellationToken)
-	{
-		var response = await _client.SendAsync(request, cancellationToken);
+    public async Task<HttpResponseMessage> SendAsync<T>(
+        HttpRequestMessage request, CancellationToken cancellationToken)
+    {
+        var response = await _client.SendAsync(request, cancellationToken);
 
-		return response;
-	}
+        return response;
+    }
 
-	#endregion Methods
+    #endregion Methods
 }

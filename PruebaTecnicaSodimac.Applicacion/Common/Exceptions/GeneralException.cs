@@ -11,12 +11,12 @@ namespace PruebaTecnicaSodimac.Application.Common.Exceptions;
 /// </summary>
 public class GeneralException : Exception
 {
-	private const string DefaultMessage = "La entidad no existe.";
-	public GeneralException() : base(DefaultMessage) { }
-	public GeneralException(string message) : base(message) { }
+    private const string DefaultMessage = "La entidad no existe.";
+    public GeneralException() : base(DefaultMessage) { }
+    public GeneralException(string message) : base(message) { }
 
-	public GeneralException(string message, Exception innerException) : base(
-		message, innerException)
-	{
-	}
+    public GeneralException(string message, Exception innerException) : base(
+        message, innerException)
+    {
+    }
 }
