@@ -20,4 +20,14 @@ namespace PruebaTecnicaSodimac.Application.Common.Interfaces.Repository
 		Task SaveChangesAsync();
 	}
 
+    public interface IRutaRepository
+    {
+        Task<IEnumerable<Ruta>> GetAllAsync();
+        Task<Ruta?> GetByIdAsync(int id);
+        Task<Ruta> CreateAsync(Ruta ruta);
+        Task UpdateAsync(Ruta ruta);
+        Task DeleteAsync(Ruta ruta);
+        Task<bool> HasPedidosAsociadosAsync(int idRuta);
+    }
+
 }

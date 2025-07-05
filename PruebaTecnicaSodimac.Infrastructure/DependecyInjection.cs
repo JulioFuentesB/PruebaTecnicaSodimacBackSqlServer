@@ -73,14 +73,15 @@ public static class DependecyInjection
 				builder => builder
 					.AllowAnyMethod()
 					.AllowAnyHeader()
-					.WithOrigins(ListOrigin.ToArray()));
+					.WithOrigins("*"/*ListOrigin.ToArray()*/));
 		});
 
 
 		services.Configure<AppSettings>(options => configuration.Bind(options));
 
 		services.AddTransient<IPedidoRepository, PedidoRepository>();
-   
+        services.AddTransient<IRutaRepository, RutaRepository>();
+
 
 
         return services;

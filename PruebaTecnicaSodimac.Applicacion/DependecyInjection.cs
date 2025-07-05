@@ -38,7 +38,8 @@ public static class DependecyInjection
 		services.AddTransient<ISerilogImplements, SerilogImplements>();
 		services.AddTransient<IRouteService, SimulatedRouteService>();
 		services.AddTransient<IPedidoService, PedidoService>();
+		services.AddTransient<IRutaService, RutaService>();
 
-		return services;
+        return services;
 	}
 }
