@@ -89,7 +89,8 @@ namespace PruebaTecnicaSodimac.Application.Common.Entidad
 		public int IdCliente { get; set; }
 		public string Nombre { get; set; }
 		public string Email { get; set; }
-	}
+        public string Direccion { get; set; } = null!;
+    }
 
 	// DTOs para Productos
 	public class ProductoPedidoDto
@@ -116,7 +117,8 @@ namespace PruebaTecnicaSodimac.Application.Common.Entidad
 		public int IdRuta { get; set; }
 		public string Estado { get; set; }
 		public DateTime FechaAsignacion { get; set; }
-	}
+        public DateTime? FechaEstimadaEntrega { get; set; }
+    }
 
 	// DTOs para SaaS
 	public class OrderAssignmentRequest
@@ -151,5 +153,41 @@ namespace PruebaTecnicaSodimac.Application.Common.Entidad
 		public string Periodo { get; set; }
 		public Dictionary<string, dynamic> Totales { get; set; }
 	}
+
+    // Clientes
+    public class ClienteCreateDto
+    {
+        [Required, MaxLength(100)]
+        public string Nombre { get; set; }
+
+        [Required, MaxLength(200)]
+        public string Direccion { get; set; }
+
+        [Required, EmailAddress]
+        public string Email { get; set; }
+
+        public string Telefono { get; set; }
+    }
+
+    public class ClienteUpdateDto
+    {
+        public string? Nombre { get; set; }
+        public string? Direccion { get; set; }
+        public string? Email { get; set; }
+        public string? Telefono { get; set; }
+    }
+
+    // Rutas
+    public class RutaCreateDto
+    {
+        [Required]
+        public DateTime FechaEstimadaEntrega { get; set; }
+    }
+
+    public class RutaUpdateDto
+    {
+        public string? Estado { get; set; }
+        public DateTime? FechaEstimadaEntrega { get; set; }
+    }
 
 }
