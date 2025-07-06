@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using PruebaTecnicaSodimac.Application.Common.Interfaces.Repository;
 using PruebaTecnicaSodimac.Infrastructure.Context;
 
-namespace PruebaTecnicaSodimac.Infrastructure.Repositories.App
+namespace PruebaTecnicaSodimac.Infrastructure.Repositories
 {
     public class ClienteRepository : IClienteRepository
     {

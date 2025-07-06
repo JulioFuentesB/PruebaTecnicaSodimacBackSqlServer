@@ -7,11 +7,10 @@
 using ClassLibrary1.Data.Entities;
 
 using Microsoft.EntityFrameworkCore;
-
 using PruebaTecnicaSodimac.Application.Common.Interfaces.Repository;
 using PruebaTecnicaSodimac.Infrastructure.Context;
 
-namespace PruebaTecnicaSodimac.Infrastructure.Repositories.App
+namespace PruebaTecnicaSodimac.Infrastructure.Repositories
 {
     public class PedidoRepository : IPedidoRepository
     {
@@ -34,28 +33,17 @@ namespace PruebaTecnicaSodimac.Infrastructure.Repositories.App
 
         public async Task<Pedido?> GetPedidoByIdAsync(int id)
         {
-            try
-            {
-                var pedidoss = await _context.Pedidos
-                    .ToListAsync();
+            var pedidoss = await _context.Pedidos
+                .ToListAsync();
 
-                var resultado = await _context.Pedidos
-            .Include(p => p.IdClienteNavigation)
-            .Include(p => p.PedidoProductos)
-                .ThenInclude(pp => pp.IdProductoNavigation)
-            .FirstOrDefaultAsync(p => p.IdPedido == id);
-                return resultado;
-            }
-            catch (Exception ex)
-
-
-            {
-
-                throw;
-            }
+            var resultado = await _context.Pedidos
+        .Include(p => p.IdClienteNavigation)
+        .Include(p => p.PedidoProductos)
+            .ThenInclude(pp => pp.IdProductoNavigation)
+        .FirstOrDefaultAsync(p => p.IdPedido == id);
+            return resultado;
 
         }
-
 
         public async Task<List<Pedido>> GetPedidosPorClienteAsync(int idCliente) =>
             await _context.Pedidos

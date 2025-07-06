@@ -13,7 +13,7 @@ using PruebaTecnicaSodimac.Application.Common.Interfaces.Repository;
 using PruebaTecnicaSodimac.Application.Common.Struct;
 using PruebaTecnicaSodimac.Domain;
 using PruebaTecnicaSodimac.Infrastructure.Context;
-using PruebaTecnicaSodimac.Infrastructure.Repositories.App;
+using PruebaTecnicaSodimac.Infrastructure.Repositories;
 
 namespace PruebaTecnicaSodimac.Infrastructure;
 
@@ -32,14 +32,8 @@ public static class DependecyInjection
     {
         builder?.Services.AddDbContextFactory<AppDbContext>(options =>
         {
-            ConfigureDbContextOptions(builder, options, ""/*ConfigurationStruct.SGL_HCAV*/);
+            ConfigureDbContextOptions(builder, options, "");
         });
-        var conexion = "Server=AC-025\\SQLEXPRESS;Database=PruebaTecnicaS;Trusted_Connection=True;TrustServerCertificate=True;";
-
-
-
-        //    builder.Services.AddDbContext<AppDbContext>(opciones =>
-        //opciones.UseSqlServer("name=DefaultConnection", sqlServer =>sqlServer.UseNetTopologySuite()));
 
     }
 
@@ -92,6 +86,12 @@ public static class DependecyInjection
         services.AddTransient<IPedidoRepository, PedidoRepository>();
         services.AddTransient<IRutaRepository, RutaRepository>();
         services.AddTransient<IClienteRepository, ClienteRepository>();
+        services.AddTransient<IProductoRepository, ProductoRepository>();
+        services.AddTransient<IReporteRepository, ReporteRepository>();
+
+
+
+
 
 
 

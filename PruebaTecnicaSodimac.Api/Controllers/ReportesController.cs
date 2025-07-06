@@ -5,66 +5,34 @@
 // </copyright>
 
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 using PruebaTecnicaSodimac.Application.Common.Entidad;
-using PruebaTecnicaSodimac.Infrastructure.Context;
+using PruebaTecnicaSodimac.Application.Common.Interfaces.Services;
 
 namespace PruebaTecnicaSodimac.Api.Controllers
 {
+
     [ApiController]
     [Route("api/[controller]")]
     public class ReportesController : ControllerBase
     {
-        private readonly AppDbContext _context;
+        private readonly IReporteService _reporteService;
 
-        public ReportesController(AppDbContext context)
+        public ReportesController(IReporteService reporteService)
         {
-            _context = context;
+            _reporteService = reporteService;
         }
 
-        /// <summary>
-        /// Obtiene un reporte de entregas por estado en un periodo determinado.
-        /// </summary>
-        /// <param name="desde"></param>
-        /// <param name="hasta"></param>
-        /// <returns></returns>
         [HttpGet("entregas")]
         [ProducesResponseType(typeof(ReporteEntregasDto), StatusCodes.Status200OK)]
         public async Task<ActionResult<ReporteEntregasDto>> GetReporteEntregas(
             [FromQuery] DateTime? desde = null,
             [FromQuery] DateTime? hasta = null)
         {
-            var fechaInicio = desde ?? DateTime.UtcNow.AddDays(-30);
-            var fechaFin = hasta ?? DateTime.UtcNow;
-
-            var entregas = await _context.Pedidos
-                .Where(p => p.FechaCreacion >= fechaInicio && p.FechaCreacion <= fechaFin)
-                .GroupBy(p => p.Estado)
-                .Select(g => new
-                {
-                    Estado = g.Key,
-                    Cantidad = g.Count()
-                })
-                .ToListAsync();
-
-            var total = entregas.Sum(e => e.Cantidad);
-
-            var reporte = new ReporteEntregasDto
-            {
-                Periodo = $"{fechaInicio:yyyy-MM-dd} al {fechaFin:yyyy-MM-dd}",
-                Totales = entregas
-            .Where(e => !string.IsNullOrEmpty(e.Estado))
-            .ToDictionary(
-            e => e.Estado!,
-            e => (dynamic)new
-            {
-                Cantidad = e.Cantidad,
-                Porcentaje = total > 0 ? Math.Round((double)e.Cantidad / total * 100, 2) : 0
-            })
-            };
-
+            var reporte = await _reporteService.GenerarReporteEntregasAsync(desde, hasta);
             return Ok(reporte);
         }
     }
+
+
 }

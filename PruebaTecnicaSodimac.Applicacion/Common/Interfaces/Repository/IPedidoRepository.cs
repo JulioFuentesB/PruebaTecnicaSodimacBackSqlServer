@@ -21,24 +21,7 @@ namespace PruebaTecnicaSodimac.Application.Common.Interfaces.Repository
         Task<IEnumerable<Pedido>> ObtenerPedidosPendientesAsync();
     }
 
-    public interface IRutaRepository
-    {
-        Task<IEnumerable<Ruta>> GetAllAsync();
-        Task<Ruta?> GetByIdAsync(int id);
-        Task<Ruta> CreateAsync(Ruta ruta);
-        Task UpdateAsync(Ruta ruta);
-        Task DeleteAsync(Ruta ruta);
-        Task<bool> HasPedidosAsociadosAsync(int idRuta);
-    }
 
-    public interface IClienteRepository
-    {
-        Task<IEnumerable<Cliente>> GetAllAsync();
-        Task<Cliente?> GetByIdAsync(int id);
-        Task<Cliente> CreateAsync(Cliente cliente);
-        Task UpdateAsync(Cliente cliente);
-        Task DeleteAsync(Cliente cliente);
-        Task<bool> TienePedidosAsociadosAsync(int idCliente);
-    }
+
 
 }
