@@ -117,39 +117,53 @@ namespace PruebaTecnicaSodimac.Application.Services
 
         public async Task<RouteAssignmentResponse?> AsignarRutasAsync(List<int> ids)
         {
-            var pedidos = await _repository.GetPedidosPorIdsAsync(ids);
-            if (pedidos.Any(p => p.Estado != "Pendiente")) return null;
 
-            var request = pedidos.Select(p => new OrderAssignmentRequest
+            try
             {
-                IdOrder = p.IdPedido,
-                DeliveryDate = p.FechaEntrega,
-                Destination = p.IdClienteNavigation.Direccion
-            }).ToList();
+                var pedidos = await _repository.GetPedidosPorIdsAsync(ids);
+                if (pedidos.Any(p => p.Estado != "Pendiente")) return null;
 
-            var response = await _routeService.AssignRouteAsync(request);
+                var request = pedidos.Select(p => new OrderAssignmentRequest
+                {
+                    IdOrder = p.IdPedido,
+                    DeliveryDate = p.FechaEntrega,
+                    Destination = p.IdClienteNavigation.Direccion
+                }).ToList();
 
-            foreach (var a in response.Assignments)
+                var response = await _routeService.AssignRouteAsync(request);
+
+                foreach (var a in response.Assignments)
+                {
+                    var pedido = pedidos.First(p => p.IdPedido == a.IdOrder);
+                    var ruta = new Ruta
+                    {
+                        Estado = "EnTránsito",
+                        FechaAsignacion = DateTime.UtcNow,
+                        FechaEstimadaEntrega = a.EstimatedDelivery
+                    };
+
+                    // Guardar la ruta y obtener su IdRuta
+                    ruta = await _repository.AgregarRutaAsync(ruta);
+
+                    pedido.PedidoRutas.Add(new PedidoRutas
+                    {
+                        IdRuta = ruta.IdRuta,
+                        FechaAsignacion = DateTime.UtcNow
+                    });
+
+                    pedido.Estado = "Asignado";
+                }
+
+                await _repository.SaveChangesAsync();
+                return response;
+            }
+            catch (Exception ex)
             {
-                var pedido = pedidos.First(p => p.IdPedido == a.IdOrder);
-                var ruta = new Ruta
-                {
-                    Estado = "EnTránsito",
-                    FechaAsignacion = DateTime.UtcNow,
-                    FechaEstimadaEntrega = a.EstimatedDelivery
-                };
 
-                pedido.PedidoRutas.Add(new PedidoRutas
-                {
-                    IdRuta = ruta.IdRuta,
-                    FechaAsignacion = DateTime.UtcNow
-                });
-
-                pedido.Estado = "Asignado";
+                throw;
             }
 
-            await _repository.SaveChangesAsync();
-            return response;
+
         }
 
         public async Task<IEnumerable<PedidoPendienteDto>> ObtenerPedidosPendientesAsync()
@@ -167,7 +181,7 @@ namespace PruebaTecnicaSodimac.Application.Services
 
         private PedidoDto MapToPedidoDto(Pedido pedido)
         {
-            return new PedidoDto
+            var pedidoDto = new PedidoDto
             {
                 IdPedido = pedido.IdPedido,
                 Cliente = new ClienteDto
@@ -191,9 +205,13 @@ namespace PruebaTecnicaSodimac.Application.Services
                 {
                     IdRuta = pr.IdRuta,
                     Estado = pr.IdRutaNavigation.Estado,
-                    FechaAsignacion = pr.FechaAsignacion ?? DateTime.Now //validar
+                    FechaAsignacion = pr.FechaAsignacion ?? DateTime.Now, //validar
+                  
+
                 }).ToList()
             };
+
+            return pedidoDto;
         }
 
     }

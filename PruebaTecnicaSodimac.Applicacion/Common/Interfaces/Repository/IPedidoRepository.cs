@@ -20,6 +20,7 @@ namespace PruebaTecnicaSodimac.Application.Common.Interfaces.Repository
         Task SaveChangesAsync();
         Task<IEnumerable<Pedido>> ObtenerPedidosPendientesAsync();
         void RemovePedidoProducto(PedidoProducto pedidoProducto);
+        Task<Ruta> AgregarRutaAsync(Ruta ruta);
     }
 
 

@@ -24,6 +24,7 @@ namespace PruebaTecnicaSodimac.Infrastructure.Repositories
         public async Task<List<Pedido>> GetPedidosAsync(int page, int pageSize) =>
             await _context.Pedidos
                 .Include(p => p.IdClienteNavigation)
+                .Include(p => p.PedidoRutas).ThenInclude(pp => pp.IdRutaNavigation)
                 .Include(p => p.PedidoProductos)
                     .ThenInclude(pp => pp.IdProductoNavigation)
                 .OrderByDescending(p => p.FechaCreacion)
@@ -40,6 +41,7 @@ namespace PruebaTecnicaSodimac.Infrastructure.Repositories
         .Include(p => p.IdClienteNavigation)
         .Include(p => p.PedidoProductos)
             .ThenInclude(pp => pp.IdProductoNavigation)
+         .Include(p => p.PedidoRutas).ThenInclude(pp => pp.IdRutaNavigation)
         .FirstOrDefaultAsync(p => p.IdPedido == id);
             return resultado;
 
@@ -54,6 +56,7 @@ namespace PruebaTecnicaSodimac.Infrastructure.Repositories
             await _context.Pedidos
                 .Where(p => p.IdCliente == idCliente)
                .Include(p => p.IdClienteNavigation)
+               .Include(p => p.PedidoRutas).ThenInclude(pp => pp.IdRutaNavigation)
                 .Include(p => p.PedidoProductos)
                     .ThenInclude(pp => pp.IdProductoNavigation)
                 .ToListAsync();
@@ -62,6 +65,7 @@ namespace PruebaTecnicaSodimac.Infrastructure.Repositories
             await _context.Pedidos
                 .Where(p => ids.Contains(p.IdPedido))
                 .Include(p => p.IdClienteNavigation)
+                .Include(p => p.PedidoRutas).ThenInclude(pp => pp.IdRutaNavigation)
                 .ToListAsync();
 
         public async Task AddPedidoAsync(Pedido pedido) =>
@@ -82,7 +86,15 @@ namespace PruebaTecnicaSodimac.Infrastructure.Repositories
             return await _context.Pedidos
                 .Where(p => p.Estado == "Pendiente")
                 .Include(p => p.IdClienteNavigation)
+                //.Include(p => p.PedidoRutas).ThenInclude(pp => pp.IdRutaNavigation)
                 .ToListAsync();
+        }
+
+        public async Task<Ruta> AgregarRutaAsync(Ruta ruta)
+        {
+            await _context.Ruta.AddAsync(ruta);
+            await _context.SaveChangesAsync(); // Aquí se genera el IdRuta
+            return ruta; // Ya tendrá el IdRuta asignado
         }
 
     }
