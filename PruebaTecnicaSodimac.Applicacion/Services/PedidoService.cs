@@ -58,38 +58,6 @@ namespace PruebaTecnicaSodimac.Application.Services
             return MapToPedidoDto(pedidoConsulta);
         }
 
-        //public async Task<bool> UpdatePedidoAsync(int id, PedidoUpdateDto dto)
-        //{
-        //    try
-        //    {
-        //        var pedido = await _repository.GetPedidoByIdAsync(id);
-        //        if (pedido == null || pedido.Estado == "Entregado") return false;
-
-        //        pedido.FechaEntrega = dto.FechaEntrega ?? pedido.FechaEntrega;
-        //        if (dto.Productos != null)
-        //        {
-        //            pedido.PedidoProductos.Clear();
-        //            foreach (var p in dto.Productos)
-        //            {
-        //                pedido.PedidoProductos.Add(new PedidoProducto
-        //                {
-        //                    IdProducto = p.IdProducto,
-        //                    Cantidad = p.Cantidad
-        //                });
-        //            }
-        //        }
-
-        //        await _repository.SaveChangesAsync();
-        //        return true;
-        //    }
-        //    catch (Exception ex)
-        //    {
-
-        //        throw;
-        //    }
-   
-        //}
-
         public async Task<bool> UpdatePedidoAsync(int id, PedidoUpdateDto dto)
         {
             try
