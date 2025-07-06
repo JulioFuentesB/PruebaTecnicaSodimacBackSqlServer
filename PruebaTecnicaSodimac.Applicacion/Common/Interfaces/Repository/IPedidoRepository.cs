@@ -18,6 +18,7 @@ namespace PruebaTecnicaSodimac.Application.Common.Interfaces.Repository
         Task<List<Pedido>> GetPedidosPorClienteAsync(int idCliente);
         Task<List<Pedido>> GetPedidosPorIdsAsync(List<int> ids);
         Task SaveChangesAsync();
+        Task<IEnumerable<Pedido>> ObtenerPedidosPendientesAsync();
     }
 
     public interface IRutaRepository

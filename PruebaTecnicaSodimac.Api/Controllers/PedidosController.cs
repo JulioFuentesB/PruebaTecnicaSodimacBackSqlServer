@@ -110,7 +110,8 @@ namespace PruebaTecnicaSodimac.Api.Controllers
 
         /// <summary>
         /// Asigna rutas a una lista de pedidos.
-        /// // Notificación al SaaS para asignar rutas a pedidos
+        ///  Notificación al SaaS para asignar rutas a pedidos
+        ///  asigna pedidos  unn ente externo saas
         /// </summary>
         /// <param name="ids"></param>
         /// <returns></returns>
@@ -120,6 +121,14 @@ namespace PruebaTecnicaSodimac.Api.Controllers
             var result = await _pedidoService.AsignarRutasAsync(ids);
             return result == null ? BadRequest("No se pudo asignar rutas.") : Ok(result);
         }
+
+        [HttpGet("pendientes")]
+        public async Task<ActionResult<IEnumerable<PedidoPendienteDto>>> GetPedidosPendientes()
+        {
+            var pedidos = await _pedidoService.ObtenerPedidosPendientesAsync();
+            return Ok(pedidos);
+        }
+
     }
 
 

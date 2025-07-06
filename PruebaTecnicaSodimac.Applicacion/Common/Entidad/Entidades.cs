@@ -190,4 +190,12 @@ namespace PruebaTecnicaSodimac.Application.Common.Entidad
         public DateTime? FechaEstimadaEntrega { get; set; }
     }
 
+    public class PedidoPendienteDto
+    {
+        public int IdPedido { get; set; }
+        public string? ClienteNombre { get; set; }
+        public string? DireccionEntrega { get; set; }
+        public DateTime FechaEntrega { get; set; }
+    }
+
 }

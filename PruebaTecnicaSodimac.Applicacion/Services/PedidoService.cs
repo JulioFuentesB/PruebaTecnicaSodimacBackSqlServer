@@ -132,6 +132,19 @@ namespace PruebaTecnicaSodimac.Application.Services
             return response;
         }
 
+        public async Task<IEnumerable<PedidoPendienteDto>> ObtenerPedidosPendientesAsync()
+        {
+            var pedidos = await _repository.ObtenerPedidosPendientesAsync();
+
+            return pedidos.Select(p => new PedidoPendienteDto
+            {
+                IdPedido = p.IdPedido,
+                ClienteNombre = p.IdClienteNavigation.Nombre,
+                DireccionEntrega = p.IdClienteNavigation.Direccion,
+                FechaEntrega = p.FechaEntrega
+            });
+        }
+
         private PedidoDto MapToPedidoDto(Pedido pedido)
         {
             return new PedidoDto
@@ -141,7 +154,8 @@ namespace PruebaTecnicaSodimac.Application.Services
                 {
                     IdCliente = pedido.IdClienteNavigation.IdCliente,
                     Nombre = pedido.IdClienteNavigation.Nombre,
-                    Email = pedido.IdClienteNavigation.Email
+                    Email = pedido.IdClienteNavigation.Email,
+                    Direccion = pedido.IdClienteNavigation.Direccion ?? ""
                 },
                 FechaCreacion = pedido.FechaCreacion ?? DateTime.Now,
                 FechaEntrega = pedido.FechaEntrega,

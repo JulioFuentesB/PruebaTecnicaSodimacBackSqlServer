@@ -82,6 +82,16 @@ namespace PruebaTecnicaSodimac.Infrastructure.Repositories.App
 
         public async Task SaveChangesAsync() =>
             await _context.SaveChangesAsync();
+
+
+        public async Task<IEnumerable<Pedido>> ObtenerPedidosPendientesAsync()
+        {
+            return await _context.Pedidos
+                .Where(p => p.Estado == "Pendiente")
+                .Include(p => p.IdClienteNavigation)
+                .ToListAsync();
+        }
+
     }
 
 }

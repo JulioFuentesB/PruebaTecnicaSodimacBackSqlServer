@@ -17,6 +17,7 @@ namespace PruebaTecnicaSodimac.Application.Common.Interfaces.Services
         Task<bool> DeletePedidoAsync(int id);
         Task<IEnumerable<PedidoDto>> GetPedidosPorClienteAsync(int idCliente);
         Task<RouteAssignmentResponse?> AsignarRutasAsync(List<int> ids);
+        Task<IEnumerable<PedidoPendienteDto>> ObtenerPedidosPendientesAsync();
     }
 
     public interface IRutaService
