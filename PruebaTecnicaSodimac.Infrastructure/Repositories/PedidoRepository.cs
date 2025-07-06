@@ -45,6 +45,11 @@ namespace PruebaTecnicaSodimac.Infrastructure.Repositories
 
         }
 
+        public void RemovePedidoProducto(PedidoProducto pedidoProducto)
+        {
+            _context.PedidoProductos.Remove(pedidoProducto);
+        }
+
         public async Task<List<Pedido>> GetPedidosPorClienteAsync(int idCliente) =>
             await _context.Pedidos
                 .Where(p => p.IdCliente == idCliente)

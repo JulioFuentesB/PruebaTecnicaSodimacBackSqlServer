@@ -53,31 +53,83 @@ namespace PruebaTecnicaSodimac.Application.Services
             await _repository.AddPedidoAsync(pedido);
             await _repository.SaveChangesAsync();
 
-            return MapToPedidoDto(pedido);
+            var pedidoConsulta = await _repository.GetPedidoByIdAsync(pedido.IdPedido);
+
+            return MapToPedidoDto(pedidoConsulta);
         }
+
+        //public async Task<bool> UpdatePedidoAsync(int id, PedidoUpdateDto dto)
+        //{
+        //    try
+        //    {
+        //        var pedido = await _repository.GetPedidoByIdAsync(id);
+        //        if (pedido == null || pedido.Estado == "Entregado") return false;
+
+        //        pedido.FechaEntrega = dto.FechaEntrega ?? pedido.FechaEntrega;
+        //        if (dto.Productos != null)
+        //        {
+        //            pedido.PedidoProductos.Clear();
+        //            foreach (var p in dto.Productos)
+        //            {
+        //                pedido.PedidoProductos.Add(new PedidoProducto
+        //                {
+        //                    IdProducto = p.IdProducto,
+        //                    Cantidad = p.Cantidad
+        //                });
+        //            }
+        //        }
+
+        //        await _repository.SaveChangesAsync();
+        //        return true;
+        //    }
+        //    catch (Exception ex)
+        //    {
+
+        //        throw;
+        //    }
+   
+        //}
 
         public async Task<bool> UpdatePedidoAsync(int id, PedidoUpdateDto dto)
         {
-            var pedido = await _repository.GetPedidoByIdAsync(id);
-            if (pedido == null || pedido.Estado == "Entregado") return false;
-
-            pedido.FechaEntrega = dto.FechaEntrega ?? pedido.FechaEntrega;
-            if (dto.Productos != null)
+            try
             {
-                pedido.PedidoProductos.Clear();
-                foreach (var p in dto.Productos)
-                {
-                    pedido.PedidoProductos.Add(new PedidoProducto
-                    {
-                        IdProducto = p.IdProducto,
-                        Cantidad = p.Cantidad
-                    });
-                }
-            }
+                var pedido = await _repository.GetPedidoByIdAsync(id);
+                if (pedido == null || pedido.Estado == "Entregado") return false;
 
-            await _repository.SaveChangesAsync();
-            return true;
+                // Actualiza la fecha de entrega
+                pedido.FechaEntrega = dto.FechaEntrega ?? pedido.FechaEntrega;
+
+                if (dto.Productos != null)
+                {
+                    // Elimina los productos actuales del pedido de forma explícita
+                    var productosActuales = pedido.PedidoProductos.ToList();
+                    foreach (var producto in productosActuales)
+                    {
+                        _repository.RemovePedidoProducto(producto); // Método para marcar entidad como eliminada
+                    }
+
+                    // Agrega los nuevos productos
+                    foreach (var p in dto.Productos)
+                    {
+                        pedido.PedidoProductos.Add(new PedidoProducto
+                        {
+                            IdPedido = pedido.IdPedido, // importante para mantener la FK
+                            IdProducto = p.IdProducto,
+                            Cantidad = p.Cantidad
+                        });
+                    }
+                }
+
+                await _repository.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception)
+            {
+                throw; // (opcional: loguear excepción aquí)
+            }
         }
+
 
         public async Task<bool> DeletePedidoAsync(int id)
         {

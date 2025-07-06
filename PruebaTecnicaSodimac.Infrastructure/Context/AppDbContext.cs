@@ -78,16 +78,19 @@ public partial class AppDbContext : Microsoft.EntityFrameworkCore.DbContext
 
             entity.ToTable("PedidoProducto");
 
-            entity.HasOne(d => d.IdPedidoNavigation).WithMany(p => p.PedidoProductos)
+            entity.HasOne(d => d.IdPedidoNavigation)
+                .WithMany(p => p.PedidoProductos)
                 .HasForeignKey(d => d.IdPedido)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.Cascade) // <- Aplica la eliminación en cascada
                 .HasConstraintName("FK_PedidoProducto_Pedido");
 
-            entity.HasOne(d => d.IdProductoNavigation).WithMany(p => p.PedidoProductos)
+            entity.HasOne(d => d.IdProductoNavigation)
+                .WithMany(p => p.PedidoProductos)
                 .HasForeignKey(d => d.IdProducto)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.ClientSetNull) // O Cascade si también quieres borrarlos en cascada
                 .HasConstraintName("FK_PedidoProducto_Producto");
         });
+
 
         modelBuilder.Entity<PedidoRutas>(entity =>
         {
