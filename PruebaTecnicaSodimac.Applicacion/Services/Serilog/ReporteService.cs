@@ -13,13 +13,12 @@ namespace PruebaTecnicaSodimac.Application.Services.Serilog
             _reporteRepository = reporteRepository;
         }
 
-        public async Task<ReporteEntregasDto> GenerarReporteEntregasAsync(DateTime? desde, DateTime? hasta)
+        public async Task<ReporteEntregasDto> GenerarReporteEntregasAsync(string? desde, string? hasta)
         {
-            var fechaInicio = desde ?? DateTime.UtcNow.AddDays(-30);
-            var fechaFin = hasta ?? DateTime.UtcNow;
+            DateTime fechaInicio = !string.IsNullOrWhiteSpace(desde) ? ParseFecha(desde) : DateTime.UtcNow.AddDays(-30);
+            DateTime fechaFin = !string.IsNullOrWhiteSpace(hasta) ? ParseFecha(hasta) : DateTime.UtcNow;
 
             var entregas = await _reporteRepository.ConsultarEntregasPorEstado(fechaInicio, fechaFin);
-
             var total = entregas.Sum(e => e.Cantidad);
 
             return new ReporteEntregasDto
@@ -36,6 +35,21 @@ namespace PruebaTecnicaSodimac.Application.Services.Serilog
                         })
             };
         }
+
+        private DateTime ParseFecha(string fechaTexto)
+        {
+            var partes = fechaTexto.Split('/');
+            if (partes.Length != 3)
+                throw new FormatException("Formato de fecha inválido. Se espera dd/MM/yyyy.");
+
+            int dia = int.Parse(partes[0]);
+            int mes = int.Parse(partes[1]);
+            int año = int.Parse(partes[2]);
+
+            return new DateTime(año, mes, dia);
+        }
+
+
     }
 
 }

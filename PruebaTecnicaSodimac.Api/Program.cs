@@ -1,9 +1,15 @@
 using Microsoft.OpenApi.Models;
 using PruebaTecnicaSodimac.Application;
 using PruebaTecnicaSodimac.Infrastructure;
+using System.Globalization;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Cambiar la cultura predeterminada a español de Colombia o España
+var cultureInfo = new CultureInfo("es-CO"); // o "es-ES"
+CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
+CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
 
 string versionApi = "v1.0";
 string? AssemblyName = Assembly.GetExecutingAssembly().GetName().Name;

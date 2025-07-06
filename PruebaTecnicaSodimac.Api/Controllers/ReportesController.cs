@@ -26,8 +26,8 @@ namespace PruebaTecnicaSodimac.Api.Controllers
         [HttpGet("entregas")]
         [ProducesResponseType(typeof(ReporteEntregasDto), StatusCodes.Status200OK)]
         public async Task<ActionResult<ReporteEntregasDto>> GetReporteEntregas(
-            [FromQuery] DateTime? desde = null,
-            [FromQuery] DateTime? hasta = null)
+            [FromQuery] string? desde = null,
+            [FromQuery] string? hasta = null)
         {
             var reporte = await _reporteService.GenerarReporteEntregasAsync(desde, hasta);
             return Ok(reporte);

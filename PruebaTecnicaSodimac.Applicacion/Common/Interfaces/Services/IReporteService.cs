@@ -10,7 +10,7 @@ namespace PruebaTecnicaSodimac.Application.Common.Interfaces.Services
 {
     public interface IReporteService
     {
-        Task<ReporteEntregasDto> GenerarReporteEntregasAsync(DateTime? desde, DateTime? hasta);
+        Task<ReporteEntregasDto> GenerarReporteEntregasAsync(string? desde, string? hasta);
     }
 
 }
