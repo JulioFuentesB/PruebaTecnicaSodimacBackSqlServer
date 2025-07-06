@@ -16,25 +16,49 @@ namespace PruebaTecnicaSodimac.Api.Controllers
             _clienteService = clienteService;
         }
 
+        /// <summary>
+        /// Obtiene una lista de todos los clientes.
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
+        [ProducesResponseType(typeof(IEnumerable<ClienteDto>), StatusCodes.Status200OK)]
         public async Task<ActionResult<IEnumerable<ClienteDto>>> GetClientes()
             => Ok(await _clienteService.ObtenerTodosAsync());
 
+        /// <summary>
+        /// Obtiene un cliente por su ID.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet("{id}")]
+        [ProducesResponseType(typeof(ClienteDto), StatusCodes.Status200OK)]
         public async Task<ActionResult<ClienteDto>> GetCliente(int id)
         {
             var cliente = await _clienteService.ObtenerPorIdAsync(id);
             return cliente == null ? NotFound() : Ok(cliente);
         }
 
+        /// <summary>
+        /// Crea un nuevo cliente.
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
         [HttpPost]
+        [ProducesResponseType(typeof(ClienteDto), StatusCodes.Status201Created)]
         public async Task<ActionResult<ClienteDto>> CreateCliente(ClienteCreateDto dto)
         {
             var clienteDto = await _clienteService.CrearAsync(dto);
             return CreatedAtAction(nameof(GetCliente), new { id = clienteDto.IdCliente }, clienteDto);
         }
 
+        /// <summary>
+        /// Actualiza un cliente existente.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="dto"></param>
+        /// <returns></returns>
         [HttpPut("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<IActionResult> UpdateCliente(int id, ClienteUpdateDto dto)
         {
             try
@@ -48,7 +72,13 @@ namespace PruebaTecnicaSodimac.Api.Controllers
             }
         }
 
+        /// <summary>
+        /// Elimina un cliente por su ID.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<IActionResult> DeleteCliente(int id)
         {
             try
@@ -67,99 +97,5 @@ namespace PruebaTecnicaSodimac.Api.Controllers
         }
     }
 
-    //[ApiController]
-    //[Route("api/[controller]")]
-    //public class ClientesController : ControllerBase
-    //{
-    //    private readonly AppDbContext _context;
-
-    //    public ClientesController(AppDbContext context)
-    //    {
-    //        _context = context;
-    //    }
-
-    //    [HttpGet]
-    //    public async Task<ActionResult<IEnumerable<ClienteDto>>> GetClientes()
-    //    {
-    //        return await _context.Clientes
-    //            .Select(c => new ClienteDto
-    //            {
-    //                IdCliente = c.IdCliente,
-    //                Nombre = c.Nombre,
-    //                Email = c.Email,
-    //                Direccion = c.Direccion
-    //            })
-    //            .ToListAsync();
-    //    }
-
-    //    [HttpGet("{id}")]
-    //    public async Task<ActionResult<ClienteDto>> GetCliente(int id)
-    //    {
-    //        var cliente = await _context.Clientes.FindAsync(id);
-    //        if (cliente == null) return NotFound();
-
-    //        return new ClienteDto
-    //        {
-    //            IdCliente = cliente.IdCliente,
-    //            Nombre = cliente.Nombre,
-    //            Email = cliente.Email,
-    //            Direccion = cliente.Direccion
-    //        };
-    //    }
-
-    //    [HttpPost]
-    //    public async Task<ActionResult<ClienteDto>> CreateCliente(ClienteCreateDto dto)
-    //    {
-    //        var cliente = new Cliente
-    //        {
-    //            Nombre = dto.Nombre,
-    //            Direccion = dto.Direccion,
-    //            Email = dto.Email,
-    //            Telefono = dto.Telefono
-    //        };
-
-    //        _context.Clientes.Add(cliente);
-    //        await _context.SaveChangesAsync();
-
-    //        return CreatedAtAction(nameof(GetCliente),
-    //            new { id = cliente.IdCliente },
-    //            new ClienteDto
-    //            {
-    //                IdCliente = cliente.IdCliente,
-    //                Nombre = cliente.Nombre,
-    //                Email = cliente.Email,
-    //                Direccion = cliente.Direccion
-    //            });
-    //    }
-
-    //    [HttpPut("{id}")]
-    //    public async Task<IActionResult> UpdateCliente(int id, ClienteUpdateDto dto)
-    //    {
-    //        var cliente = await _context.Clientes.FindAsync(id);
-    //        if (cliente == null) return NotFound();
-
-    //        cliente.Nombre = dto.Nombre ?? cliente.Nombre;
-    //        cliente.Direccion = dto.Direccion ?? cliente.Direccion;
-    //        cliente.Email = dto.Email ?? cliente.Email;
-    //        cliente.Telefono = dto.Telefono ?? cliente.Telefono;
-
-    //        await _context.SaveChangesAsync();
-    //        return NoContent();
-    //    }
-
-    //    [HttpDelete("{id}")]
-    //    public async Task<IActionResult> DeleteCliente(int id)
-    //    {
-    //        var cliente = await _context.Clientes.FindAsync(id);
-    //        if (cliente == null) return NotFound();
-
-    //        // Verificar si tiene pedidos asociados
-    //        if (await _context.Pedidos.AnyAsync(p => p.IdCliente == id))
-    //            return BadRequest("No se puede eliminar un cliente con pedidos asociados");
-
-    //        _context.Clientes.Remove(cliente);
-    //        await _context.SaveChangesAsync();
-    //        return NoContent();
-    //    }
-    //}
+   
 }

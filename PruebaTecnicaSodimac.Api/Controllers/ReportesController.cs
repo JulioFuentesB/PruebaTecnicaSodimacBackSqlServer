@@ -23,7 +23,14 @@ namespace PruebaTecnicaSodimac.Api.Controllers
             _context = context;
         }
 
+        /// <summary>
+        /// Obtiene un reporte de entregas por estado en un periodo determinado.
+        /// </summary>
+        /// <param name="desde"></param>
+        /// <param name="hasta"></param>
+        /// <returns></returns>
         [HttpGet("entregas")]
+        [ProducesResponseType(typeof(ReporteEntregasDto), StatusCodes.Status200OK)]
         public async Task<ActionResult<ReporteEntregasDto>> GetReporteEntregas(
             [FromQuery] DateTime? desde = null,
             [FromQuery] DateTime? hasta = null)

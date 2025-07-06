@@ -17,7 +17,12 @@ namespace PruebaTecnicaSodimac.Api.Controllers
             _context = context;
         }
 
+        /// <summary>
+        /// Obtiene una lista de todos los productos.
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
+        [ProducesResponseType(typeof(IEnumerable<ProductoDto>), StatusCodes.Status200OK)]
         public async Task<ActionResult<IEnumerable<ProductoDto>>> GetProductos()
         {
             return await _context.Productos
@@ -31,7 +36,13 @@ namespace PruebaTecnicaSodimac.Api.Controllers
                 .ToListAsync();
         }
 
+        /// <summary>
+        /// Obtiene un producto por su ID.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet("{id}")]
+        [ProducesResponseType(typeof(ProductoDto), StatusCodes.Status200OK)]
         public async Task<ActionResult<ProductoDto>> GetProducto(int id)
         {
             var producto = await _context.Productos.FindAsync(id);
@@ -48,8 +59,13 @@ namespace PruebaTecnicaSodimac.Api.Controllers
 
 
 
-        // POST: api/productos
+        /// <summary>
+        /// Crea un nuevo producto.
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
         [HttpPost]
+        [ProducesResponseType(typeof(ProductoDto), StatusCodes.Status201Created)]
         public async Task<ActionResult<ProductoDto>> CreateProducto(ProductoCreateDto dto)
         {
             var producto = new Producto
@@ -73,7 +89,12 @@ namespace PruebaTecnicaSodimac.Api.Controllers
                 });
         }
 
-        // PUT: api/productos/5
+        /// <summary>
+        /// Actualiza un producto existente.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="dto"></param>
+        /// <returns></returns>
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateProducto(int id, ProductoUpdateDto dto)
         {
@@ -88,7 +109,11 @@ namespace PruebaTecnicaSodimac.Api.Controllers
             return NoContent();
         }
 
-        // DELETE: api/productos/5
+        /// <summary>
+        /// Elimina un producto por su ID.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteProducto(int id)
         {
