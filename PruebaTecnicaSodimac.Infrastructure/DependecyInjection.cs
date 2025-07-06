@@ -24,24 +24,20 @@ public static class DependecyInjection
     {
 
         AddHacvSglDbContextFactory(builder);
-
-
     }
 
     private static void AddHacvSglDbContextFactory(WebApplicationBuilder builder)
     {
         builder?.Services.AddDbContextFactory<AppDbContext>(options =>
         {
-            ConfigureDbContextOptions(builder, options, "");
+            ConfigureDbContextOptions(builder, options);
         });
 
     }
 
-    private static void ConfigureDbContextOptions(WebApplicationBuilder builder, DbContextOptionsBuilder options, string connectionStringName)
+    private static void ConfigureDbContextOptions(WebApplicationBuilder builder, DbContextOptionsBuilder options)
     {
-
-        var conexion = "Server=AC-025\\SQLEXPRESS;Database=PruebaTecnicaS;Trusted_Connection=True;TrustServerCertificate=True;";
-        // Environment.GetEnvironmentVariable(connectionStringName);
+        var conexion = builder?.Configuration?.GetConnectionString("DefaultConnection");
 
         options.UseSqlServer(conexion)
         .ConfigureWarnings(b => b.Ignore(Microsoft.EntityFrameworkCore.Diagnostics.SqlServerEventId.DecimalTypeDefaultWarning));
