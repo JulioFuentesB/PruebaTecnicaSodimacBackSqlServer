@@ -135,9 +135,12 @@ namespace PruebaTecnicaSodimac.Application.Services
                 foreach (var a in response.Assignments)
                 {
                     var pedido = pedidos.First(p => p.IdPedido == a.IdOrder);
+
+                    var estadoRutaSaas = await _routeService.GetRouteStatusAsync(a.IdRoute);
+
                     var ruta = new Ruta
                     {
-                        Estado = "EnTránsito",
+                        Estado = estadoRutaSaas.CurrentStatus,
                         FechaAsignacion = DateTime.UtcNow,
                         FechaEstimadaEntrega = a.EstimatedDelivery
                     };
