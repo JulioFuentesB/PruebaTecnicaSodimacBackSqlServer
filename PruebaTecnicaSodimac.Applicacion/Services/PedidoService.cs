@@ -154,7 +154,26 @@ namespace PruebaTecnicaSodimac.Application.Services
                         FechaAsignacion = DateTime.UtcNow
                     });
 
-                    pedido.Estado = "Asignado";
+                    var estadoPedidoHomologa = "Asignado";
+
+                    if (estadoRutaSaas.CurrentStatus == "EnTránsito")
+                    {
+                        estadoPedidoHomologa = "EnTránsito";
+                    }
+                    else if (estadoRutaSaas.CurrentStatus == "Reportado")
+                    {
+                        estadoPedidoHomologa = "EnTránsito";
+                    }
+                    else if (estadoRutaSaas.CurrentStatus == "Novedad")
+                    {
+                        estadoPedidoHomologa = "EnTránsito";
+                    }
+                    else if (estadoRutaSaas.CurrentStatus == "Entregado")
+                    {
+                        estadoPedidoHomologa = "Entregado";
+                    }
+
+                    pedido.Estado = estadoPedidoHomologa;
                 }
 
                 await _repository.SaveChangesAsync();
