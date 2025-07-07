@@ -70,7 +70,8 @@ namespace PruebaTecnicaSodimac.Application.Services
                 IdCliente = cliente.IdCliente,
                 Nombre = cliente.Nombre,
                 Email = cliente.Email,
-                Direccion = cliente.Direccion
+                Direccion = cliente.Direccion,
+                Telefono = cliente.Telefono
             };
         }
     }

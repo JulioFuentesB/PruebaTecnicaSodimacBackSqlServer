@@ -16,6 +16,13 @@ namespace PruebaTecnicaSodimac.Application.Common.Interfaces.Repository
         Task ActualizarAsync(Producto producto);
         Task EliminarAsync(Producto producto);
         Task<bool> ExisteEnPedidosAsync(int idProducto);
+        Task<IEnumerable<Producto>> GetAllAsync();
+        Task<Producto?> GetByIdAsync(int id);
+        Task<Producto> CreateAsync(Producto producto);
+        Task UpdateAsync(Producto producto);
+        Task DeleteAsync(int id);
+        Task<bool> ExistsAsync(int id);
+        Task<bool> SkuExistsAsync(string sku, int? excludeId = null);
     }
 
 

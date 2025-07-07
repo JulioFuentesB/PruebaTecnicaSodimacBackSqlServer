@@ -90,6 +90,7 @@ namespace PruebaTecnicaSodimac.Application.Common.Entidad
         public string Nombre { get; set; }
         public string Email { get; set; }
         public string Direccion { get; set; } = null!;
+        public string? Telefono { get; set; }
     }
 
     // DTOs para Productos

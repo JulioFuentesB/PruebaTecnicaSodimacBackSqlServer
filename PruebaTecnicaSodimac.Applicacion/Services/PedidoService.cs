@@ -206,7 +206,7 @@ namespace PruebaTecnicaSodimac.Application.Services
                     IdRuta = pr.IdRuta,
                     Estado = pr.IdRutaNavigation.Estado,
                     FechaAsignacion = pr.FechaAsignacion ?? DateTime.Now, //validar
-                  
+
 
                 }).ToList()
             };

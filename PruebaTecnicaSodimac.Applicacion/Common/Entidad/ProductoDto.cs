@@ -9,6 +9,7 @@ namespace PruebaTecnicaSodimac.Application.Common.Entidad
         public string? Nombre { get; set; }
         public string? Sku { get; set; }
         public decimal Precio { get; set; }
+        public string? Descripcion { get; set; }
     }
 
 
@@ -22,6 +23,7 @@ namespace PruebaTecnicaSodimac.Application.Common.Entidad
 
         [Required, Range(0.01, double.MaxValue)]
         public decimal Precio { get; set; }
+        public string? Descripcion { get; set; }
     }
 
     public class ProductoUpdateDto
@@ -34,5 +36,12 @@ namespace PruebaTecnicaSodimac.Application.Common.Entidad
 
         [Range(0.01, double.MaxValue)]
         public decimal? Precio { get; set; }
+        public string? Descripcion { get; set; }
     }
+
+
+    public record ResultadoValidacionSKU(
+    bool Disponible,
+    string SKU,
+    string Mensaje);
 }

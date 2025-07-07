@@ -15,6 +15,7 @@ namespace PruebaTecnicaSodimac.Application.Common.Interfaces.Services
         Task<ProductoDto> CrearAsync(ProductoCreateDto dto);
         Task ActualizarAsync(int id, ProductoUpdateDto dto);
         Task EliminarAsync(int id);
+        Task<ResultadoValidacionSKU> VerificarSkuUnicoAsync(string sku, int? idProducto = null);
     }
 
 }
